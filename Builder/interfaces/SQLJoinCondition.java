@@ -17,4 +17,9 @@ public interface SQLJoinCondition {
     public SQLJoinBuilder isGraterThanAndEqual(SQLBuilder builder) throws Exception;
     public SQLJoinBuilder isLessThanAndEqual(SQLBuilder builder) throws Exception;
     public SQLJoinBuilder isLike(SQLBuilder builder) throws Exception;
+
+    public SQLJoinBuilder isTrue();
+    public SQLJoinBuilder isFalse();
+    public SQLJoinBuilder isNull();
+    public SQLJoinBuilder isNotNull();
 }

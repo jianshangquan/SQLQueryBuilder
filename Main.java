@@ -1,6 +1,7 @@
 package com.jiantech.SearchQueryForSQL;
 
 import com.jiantech.SearchQueryForSQL.Builder.SQLBuilder;
+import com.jiantech.SearchQueryForSQL.Builder.SQLFun;
 
 public class Main {
 
@@ -25,10 +26,12 @@ public class Main {
         String sqlQuery = "";
 
         sqlQuery = SQLBuilder.getMySQLBuilder()
-                        .selectStar().from("goldpawndata")
-                        .where().field("column1").isEqualTo("123").nextPipe()
-                        .orderBy("voucher_id").ascending().nextPipe()
-                        .build();
+                        .select("voucher_id","item_name",
+                                SQLFun.sum("pawn_amount").as("sum").compile()
+                                )
+                                .from("goldpawndata")
+                .where().field("is_delete").isNotNull().nextPipe()
+                .build();
 
 
 

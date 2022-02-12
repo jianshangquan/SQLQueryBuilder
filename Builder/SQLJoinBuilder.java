@@ -195,6 +195,30 @@ public class SQLJoinBuilder implements BuildPipeable, SQLJoinCondition, Joinable
     }
 
     @Override
+    public SQLJoinBuilder isTrue() {
+        builder.pipe.append(" = TRUE");
+        return this;
+    }
+
+    @Override
+    public SQLJoinBuilder isFalse() {
+        builder.pipe.append(" = FALSE");
+        return this;
+    }
+
+    @Override
+    public SQLJoinBuilder isNull() {
+        builder.pipe.append(" IS NULL");
+        return this;
+    }
+
+    @Override
+    public SQLJoinBuilder isNotNull() {
+        builder.pipe.append(" IS NOT NULL");
+        return this;
+    }
+
+    @Override
     public SQLBuilder nextPipe() {
         return builder;
     }

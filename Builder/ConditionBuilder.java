@@ -6,16 +6,16 @@ import com.jiantech.SearchQueryForSQL.Builder.interfaces.SQLWhereConditions;
 import com.jiantech.SearchQueryForSQL.Builder.interfaces.Verifiable;
 
 public class ConditionBuilder implements BuildPipeable, SQLWhereConditions, Verifiable {
-    SQLBuilder sqlBuilder;
+    SQLBuilder builder;
     boolean conditionApplied = false;
     boolean fieldCalled = false;
     int numberOfScrope = 0;
 
     public ConditionBuilder(SQLBuilder builder){
-        this.sqlBuilder = builder;
+        this.builder = builder;
         conditionApplied = true;
-        this.sqlBuilder.pipe.append(" \nWHERE");
-        this.sqlBuilder.syntaxVerificationPipe.add(this);
+        this.builder.pipe.append(" \nWHERE");
+        this.builder.syntaxVerificationPipe.add(this);
     }
 
     public ConditionBuilder useConditionBuilder(SQLConditionClauseBuilder builder) throws Exception{
@@ -27,31 +27,31 @@ public class ConditionBuilder implements BuildPipeable, SQLWhereConditions, Veri
 
     public SQLWhereConditions field(String fieldName){
         fieldCalled = true;
-        sqlBuilder.pipe.append(" " + fieldName);
+        builder.pipe.append(" " + fieldName);
         return this;
     }
 
 
 
     public ConditionBuilder and(){
-        sqlBuilder.pipe.append(" AND");
+        builder.pipe.append(" AND");
         return this;
     }
 
     public ConditionBuilder or(){
-        sqlBuilder.pipe.append(" OR");
+        builder.pipe.append(" OR");
         return this;
     }
 
     public ConditionBuilder startScope(){
         numberOfScrope++;
-        sqlBuilder.pipe.append(" (");
+        builder.pipe.append(" (");
         return this;
     }
 
     public ConditionBuilder endScope(){
         numberOfScrope--;
-        sqlBuilder.pipe.append(" )");
+        builder.pipe.append(" )");
         return this;
     }
 
@@ -60,42 +60,42 @@ public class ConditionBuilder implements BuildPipeable, SQLWhereConditions, Veri
         if(numberOfScrope != 0) {
             throw new Exception("Scrope is not closed properly");
         }
-        return sqlBuilder;
+        return builder;
     }
 
     @Override
     public ConditionBuilder isEqualTo(String value) {
-        sqlBuilder.pipe.append(" = " + value);
+        builder.pipe.append(" = " + value);
         return this;
     }
 
     @Override
     public ConditionBuilder isGraterThan(String value) {
-        sqlBuilder.pipe.append(" < " + value);
+        builder.pipe.append(" < " + value);
         return this;
     }
 
     @Override
     public ConditionBuilder isGraterThanOrEqual(String value) {
-        sqlBuilder.pipe.append(" <= " + value);
+        builder.pipe.append(" <= " + value);
         return this;
     }
 
     @Override
     public ConditionBuilder isLessThan(String value) {
-        sqlBuilder.pipe.append(" > " + value);
+        builder.pipe.append(" > " + value);
         return this;
     }
 
     @Override
     public ConditionBuilder isLessThanOrEqual(String value) {
-        sqlBuilder.pipe.append(" >= " + value);
+        builder.pipe.append(" >= " + value);
         return this;
     }
 
     @Override
     public ConditionBuilder isLike(String value) {
-        sqlBuilder.pipe.append(" like " + value);
+        builder.pipe.append(" like " + value);
         return this;
     }
 
@@ -127,6 +127,30 @@ public class ConditionBuilder implements BuildPipeable, SQLWhereConditions, Veri
     @Override
     public ConditionBuilder isLike(SQLBuilder builder) throws Exception {
         return isLike("( "+builder.build() + " ) ");
+    }
+
+    @Override
+    public ConditionBuilder isTrue() {
+        this.builder.pipe.append(" = TRUE");
+        return this;
+    }
+
+    @Override
+    public ConditionBuilder isFalse() {
+        this.builder.pipe.append(" = FALSE");
+        return this;
+    }
+
+    @Override
+    public ConditionBuilder isNull() {
+        builder.pipe.append(" IS NULL");
+        return this;
+    }
+
+    @Override
+    public ConditionBuilder isNotNull() {
+        builder.pipe.append(" IS NOT NULL");
+        return this;
     }
 
     @Override
