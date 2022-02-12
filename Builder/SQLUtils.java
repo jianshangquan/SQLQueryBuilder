@@ -1,4 +1,4 @@
-package com.jiantech.SearchQueryForSQL;
+package com.jiantech.SearchQueryForSQL.Builder;
 
 import com.jiantech.SearchQueryForSQL.Builder.SQLValidator;
 

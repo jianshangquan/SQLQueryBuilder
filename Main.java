@@ -1,6 +1,7 @@
 package com.jiantech.SearchQueryForSQL;
 
 import com.jiantech.SearchQueryForSQL.Builder.SQLBuilder;
+import com.jiantech.SearchQueryForSQL.Builder.SQLCompareType;
 import com.jiantech.SearchQueryForSQL.Builder.SQLFun;
 
 public class Main {
@@ -25,15 +26,31 @@ public class Main {
 
         String sqlQuery = "";
 
+//        sqlQuery = SQLBuilder.getMySQLBuilder()
+//                        .select("voucher_id","item_name",
+//                                SQLFun.sum("pawn_amount").as("sum").compile()
+//                                )
+//                                .from("goldpawndata")
+//                .where().field("is_delete").isNotNull().nextPipe()
+//                .build();
+
+
+
+//        sqlQuery = SQLBuilder.getMySQLBuilder()
+//                .createTable("fdsaf")
+//                        .addField("col1", "int", "1", "Utf-8")
+//                .setDefaultEncoding("fdsafd")
+//                                .nextPipe().build();
+
         sqlQuery = SQLBuilder.getMySQLBuilder()
-                        .select("voucher_id","item_name",
-                                SQLFun.sum("pawn_amount").as("sum").compile()
-                                )
-                                .from("goldpawndata")
-                .where().field("is_delete").isNotNull().nextPipe()
-                .build();
-
-
+                .select(
+                        SQLFun.sum("pawn_amount").as("sum").compile()
+                ).from("goldpawndata")
+                .join("goldchangedata").leftOuterJoin()
+                .on("voucher_id").isEqualTo("goldpawndata.voucher_id").nextPipe()
+                .where().field("item_name").isEqualTo("စောက်သံကွင်းကြိုး(၁)", SQLCompareType.STRING).and()
+                .field("goldchangedata.is_delete").isFalse().nextPipe()
+                .orderBy("item_name").ascending().nextPipe().build();
 
         System.out.println(sqlQuery);
     }

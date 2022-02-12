@@ -2,11 +2,14 @@ package com.jiantech.SearchQueryForSQL.Builder.interfaces;
 
 import com.jiantech.SearchQueryForSQL.Builder.ConditionBuilder;
 import com.jiantech.SearchQueryForSQL.Builder.SQLBuilder;
+import com.jiantech.SearchQueryForSQL.Builder.SQLCompareType;
 
 import java.util.concurrent.locks.Condition;
 
 public interface SQLWhereConditions<T> {
+
     public ConditionBuilder isEqualTo(String value);
+    public ConditionBuilder isEqualTo(String value, SQLCompareType type);
     public ConditionBuilder isGraterThan(String value);
     public ConditionBuilder isGraterThanOrEqual(String value);
     public ConditionBuilder isLessThan(String value);

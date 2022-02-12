@@ -1,4 +1,4 @@
-package com.jiantech.SearchQueryForSQL;
+package com.jiantech.SearchQueryForSQL.Builder;
 
 public class SQLString {
     String value;

@@ -1,10 +1,5 @@
 package com.jiantech.SearchQueryForSQL.Builder;
 
-import com.jiantech.SearchQueryForSQL.Builder.Model.SQLFunctionModel;
-import com.jiantech.SearchQueryForSQL.SQLString;
-
-import java.util.regex.Pattern;
-
 public class SQLFun {
     public static final String CURRENT_TIMESTAMP = "CURRENT_TIMESTAMP";
 

@@ -15,6 +15,10 @@ public abstract class SQLBuilder {
         return MySqlQueryBuilder.getInstance();
     }
 
+    public abstract SQLBuilder append(String query);
+    public abstract Buildable rawQuery(String query);
+
+    public abstract SQLTableBuilder createTable(String tableName);
     public abstract Buildable use(String dbName);
     public abstract SelectorBuilder select(String field);
     public abstract SelectorBuilder selectStar();

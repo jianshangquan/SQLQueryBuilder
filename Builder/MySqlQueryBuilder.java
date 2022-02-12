@@ -26,6 +26,11 @@ public class MySqlQueryBuilder extends SQLBuilder implements Buildable, SQLConfi
     }
 
     @Override
+    public SQLTableBuilder createTable(String tableName) {
+        return new SQLTableBuilder(this, tableName);
+    }
+
+    @Override
     public SelectorBuilder select(String ...fields){
         selectedApplied = true;
         return new SelectorBuilder(this, String.join(", ", fields));
@@ -121,6 +126,18 @@ public class MySqlQueryBuilder extends SQLBuilder implements Buildable, SQLConfi
 
     @Override
     public SQLBuilder getProcessedPipe() {
+        return this;
+    }
+
+    @Override
+    public SQLBuilder append(String query) {
+        pipe.append(query);
+        return this;
+    }
+
+    @Override
+    public Buildable rawQuery(String query) {
+        append(query);
         return this;
     }
 }

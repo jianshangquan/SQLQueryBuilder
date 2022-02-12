@@ -63,6 +63,15 @@ public class ConditionBuilder implements BuildPipeable, SQLWhereConditions, Veri
         return builder;
     }
 
+
+    @Override
+    public ConditionBuilder isEqualTo(String value, SQLCompareType type) {
+        if(type == SQLCompareType.STRING) return isEqualTo("\'" + value + "\'");
+        if(type == SQLCompareType.NUMBER) return isEqualTo(value);
+        return isEqualTo(value);
+    }
+
+
     @Override
     public ConditionBuilder isEqualTo(String value) {
         builder.pipe.append(" = " + value);

@@ -119,6 +119,12 @@ public class SQLJoinBuilder implements BuildPipeable, SQLJoinCondition, Joinable
         return this;
     }
 
+    @Override
+    public SQLJoinBuilder isEqualTo(String value, SQLCompareType type) {
+        if(type == SQLCompareType.STRING) return isEqualTo("\'" + value + "\'");
+        if(type == SQLCompareType.NUMBER) return isEqualTo(value);
+        return isEqualTo(value);
+    }
 
     @Override
     public SQLJoinBuilder isEqualTo(String value){
