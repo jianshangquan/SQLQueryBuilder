@@ -1,21 +1,30 @@
 package com.jiantech.SearchQueryForSQL;
 
+import com.jiantech.SearchQueryForSQL.Builder.MySqlQueryBuilder;
+import com.jiantech.SearchQueryForSQL.Builder.SQLBuilder;
+
 public class Main {
 
-    public static void main(String[] args) {
-        QueryForSQL.getQuery(
-                "(=123|>123)&<123&L123|>=\"235\"",
-                "event",
-                "uid"
-        );
+    public static void main(String[] args) throws Exception {
+//        QueryForSQL.getQuery(
+//                "(=123|>123)&<123&L123|>=\"235\"",
+//                "event",
+//                "uid"
+//        );
 
-        MySqlQueryBuilder mySqlQueryBuilder = new MySqlQueryBuilder();
-        mySqlQueryBuilder
-                .select("Table", "*")
-                .condition("col1", "=", "1")
-                .and()
-                .condition("col2", "=", "2")
-                .orderBy("col2", SQLOrder.DESC)
+        SQLBuilder sqlBuilder = new MySqlQueryBuilder();
+        String sqlQuery = sqlBuilder
+                .select("col1", "col2", "col3")
+                .from("tunlinpawnshop")
+                .join("fdsafd").innerJoin().on("sfdas").isEqualTo("fds").nextPipe()
+                .where().startScope().field("fdsfadsa").isLessThanOrEqual("fsaf").or()
+                .field("fdsa").isEqualTo("fdsf").endScope().nextPipe()
                 .build();
+
+
+
+
+
+        System.out.println(sqlQuery);
     }
 }

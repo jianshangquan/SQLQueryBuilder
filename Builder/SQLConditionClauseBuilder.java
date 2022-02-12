@@ -1,4 +1,4 @@
-package com.jiantech.SearchQueryForSQL;
+package com.jiantech.SearchQueryForSQL.Builder;
 
 
 
@@ -17,21 +17,44 @@ package com.jiantech.SearchQueryForSQL;
 import java.util.*;
 import java.util.stream.Collectors;
 
-public class QueryForSQL {
+public class SQLConditionClauseBuilder {
+
+    private String query;
+    private boolean isCompiled = false;
+
+
     public static final Map<String, String> compileDictionary = new HashMap<>() {{
        put("|", " or ");
        put("&", " and ");
     }};
 
-    public static String getQuery(String rawQuery, String tableName, String columnName){
-//        System.out.println("Given query " + rawQuery);
-        List lexical = split(rawQuery);
-        String sqlQuery = compileToSQlQuery(lexical, columnName);
-//        System.out.println("sql query " + sqlQuery);
-        return sqlQuery;
+    public static String compileQuery(String rawQuery, String columnName){
+        return new SQLConditionClauseBuilder().generateQuery(rawQuery, columnName);
     }
 
-    private static String compileToSQlQuery(List<String> lexical, String colName){
+    public boolean isCompiled(){
+        return isCompiled;
+    }
+
+    public String getQuery(){
+        return query;
+    }
+
+    public String generateQuery(String rawQuery, String columnName){
+//        System.out.println("Given query " + rawQuery);
+        isCompiled = true;
+        List lexical = split(rawQuery);
+        query = compileToSQlQuery(lexical, columnName);
+//        System.out.println("sql query " + sqlQuery);
+        return query;
+    }
+
+    public SQLConditionClauseBuilder compile(String rawQuery, String columnName){
+        generateQuery(rawQuery, columnName);
+        return this;
+    }
+
+    private String compileToSQlQuery(List<String> lexical, String colName){
         lexical = lexical.stream().map(keyword -> {
             if("|".equals(keyword)){
                 return " or ";
@@ -61,7 +84,7 @@ public class QueryForSQL {
         return String.join("", lexical);
     }
 
-    private static List<String> split(String rawQuery){
+    private List<String> split(String rawQuery){
         List<String> lexical = new ArrayList<>();
         String character = "";
         String context = "";
@@ -87,7 +110,7 @@ public class QueryForSQL {
     }
 
 
-    private static CombinedSyntax checkCombinedSyntax(String query, int startCheckIndex){
+    private CombinedSyntax checkCombinedSyntax(String query, int startCheckIndex){
         String startQuery = query.substring(startCheckIndex, query.length());
         if(startQuery.startsWith(">=")){
             return new CombinedSyntax(
@@ -105,7 +128,7 @@ public class QueryForSQL {
         return new CombinedSyntax();
     }
 
-    private static boolean isSyntax(String syntax){
+    private boolean isSyntax(String syntax){
         return "=".equals(syntax) ||
                 "|".equals(syntax) ||
                 "&".equals(syntax) ||
@@ -118,12 +141,12 @@ public class QueryForSQL {
                 "L".equals(syntax);
     }
 
-    private static boolean isSyntax(char syntax){
+    private boolean isSyntax(char syntax){
         return isSyntax(String.valueOf(syntax));
     }
 
 
-    private static boolean isNumeric(String value){
+    private boolean isNumeric(String value){
         if (value == null) {
             return false;
         }
@@ -135,11 +158,11 @@ public class QueryForSQL {
         return true;
     }
 
-    private static boolean isString(String value){
+    private boolean isString(String value){
         return !isNumeric(value);
     }
 
-    private static void printList(List<String> list){
+    private void printList(List<String> list){
         for (String l : list){
             System.out.print(l + ",");
         }
