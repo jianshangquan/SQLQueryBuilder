@@ -1,6 +1,8 @@
 package com.jiantech.SearchQueryForSQL.Builder;
 
-public class OrderBuilder implements BuildPipeable{
+import com.jiantech.SearchQueryForSQL.Builder.interfaces.BuildPipeable;
+
+public class OrderBuilder implements BuildPipeable {
     SQLBuilder builder;
     boolean orderApplied = false;
     String field;

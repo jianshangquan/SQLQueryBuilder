@@ -1,4 +1,4 @@
-package com.jiantech.SearchQueryForSQL.Builder;
+package com.jiantech.SearchQueryForSQL.Builder.interfaces;
 
 public interface Joinable {
     public SQLJoinOn innerJoin();

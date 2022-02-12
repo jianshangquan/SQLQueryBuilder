@@ -1,7 +1,11 @@
 package com.jiantech.SearchQueryForSQL.Builder;
 
 
-public class MySqlQueryBuilder extends SQLBuilder implements Buildable, SQLConfiguration{
+import com.jiantech.SearchQueryForSQL.Builder.interfaces.Buildable;
+import com.jiantech.SearchQueryForSQL.Builder.interfaces.Joinable;
+import com.jiantech.SearchQueryForSQL.Builder.interfaces.SQLConfiguration;
+
+public class MySqlQueryBuilder extends SQLBuilder implements Buildable, SQLConfiguration {
 
     boolean whereClauseApplied = false;
     boolean orderByClauseApplied = false;

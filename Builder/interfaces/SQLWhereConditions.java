@@ -1,4 +1,6 @@
-package com.jiantech.SearchQueryForSQL.Builder;
+package com.jiantech.SearchQueryForSQL.Builder.interfaces;
+
+import com.jiantech.SearchQueryForSQL.Builder.ConditionBuilder;
 
 public interface SQLWhereConditions<T> {
     public ConditionBuilder isEqualTo(String value);

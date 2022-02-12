@@ -1,5 +1,10 @@
 package com.jiantech.SearchQueryForSQL.Builder;
 
+import com.jiantech.SearchQueryForSQL.Builder.interfaces.BuildPipeable;
+import com.jiantech.SearchQueryForSQL.Builder.interfaces.Joinable;
+import com.jiantech.SearchQueryForSQL.Builder.interfaces.SQLJoinCondition;
+import com.jiantech.SearchQueryForSQL.Builder.interfaces.SQLJoinOn;
+
 public class SQLJoinBuilder implements BuildPipeable, SQLJoinCondition, Joinable, SQLJoinOn {
     SQLBuilder builder;
     String tableName;

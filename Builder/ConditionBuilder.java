@@ -1,6 +1,9 @@
 package com.jiantech.SearchQueryForSQL.Builder;
 
-public class ConditionBuilder implements BuildPipeable, SQLWhereConditions{
+import com.jiantech.SearchQueryForSQL.Builder.interfaces.BuildPipeable;
+import com.jiantech.SearchQueryForSQL.Builder.interfaces.SQLWhereConditions;
+
+public class ConditionBuilder implements BuildPipeable, SQLWhereConditions {
     SQLBuilder sqlBuilder;
     boolean conditionApplied = false;
     int numberOfScrope = 0;

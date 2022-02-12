@@ -1,5 +1,8 @@
 package com.jiantech.SearchQueryForSQL.Builder;
 
+import com.jiantech.SearchQueryForSQL.Builder.interfaces.Buildable;
+import com.jiantech.SearchQueryForSQL.Builder.interfaces.Joinable;
+
 public abstract class SQLBuilder {
     protected final StringBuilder pipe = new StringBuilder();
 
