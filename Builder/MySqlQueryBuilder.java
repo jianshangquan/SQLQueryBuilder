@@ -1,6 +1,7 @@
 package com.jiantech.SearchQueryForSQL.Builder;
 
 
+import com.jiantech.SearchQueryForSQL.Builder.Model.VerificationErrorMsg;
 import com.jiantech.SearchQueryForSQL.Builder.interfaces.Buildable;
 import com.jiantech.SearchQueryForSQL.Builder.interfaces.Joinable;
 import com.jiantech.SearchQueryForSQL.Builder.interfaces.SQLConfiguration;
@@ -10,6 +11,13 @@ public class MySqlQueryBuilder extends SQLBuilder implements Buildable, SQLConfi
     boolean whereClauseApplied = false;
     boolean orderByClauseApplied = false;
     boolean selectedApplied = false;
+
+    private static final SQLBuilder instance = new MySqlQueryBuilder();
+
+    protected static SQLBuilder getInstance(){
+        return instance;
+    }
+
 
     @Override
     public Buildable use(String dbName){
@@ -27,6 +35,11 @@ public class MySqlQueryBuilder extends SQLBuilder implements Buildable, SQLConfi
     public SelectorBuilder select(String field){
         selectedApplied = true;
         return new SelectorBuilder(this, field);
+    }
+
+    @Override
+    public SelectorBuilder selectStar() {
+        return select("*");
     }
 
     @Override
@@ -74,9 +87,19 @@ public class MySqlQueryBuilder extends SQLBuilder implements Buildable, SQLConfi
         return new SQLJoinBuilder(this, tableName);
     }
 
+
     @Override
-    public String build() {
-        return pipe.toString();
+    public String build() throws Exception {
+        boolean verified = true;
+        for (int i = 0; i < syntaxVerificationPipe.size(); i++){
+            VerificationErrorMsg verification = syntaxVerificationPipe.get(i).verify();
+            if(!verification.getStatus()){
+                verified = false;
+                System.out.println(verification.getMessage());
+            }
+        }
+        if(!verified) throw new Exception("There is some error within build pipe");
+        return pipe.append(";").toString();
     }
 
     @Override
@@ -93,6 +116,11 @@ public class MySqlQueryBuilder extends SQLBuilder implements Buildable, SQLConfi
 
     @Override
     public Buildable set(String query) {
+        return this;
+    }
+
+    @Override
+    public SQLBuilder getProcessedPipe() {
         return this;
     }
 }
