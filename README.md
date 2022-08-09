@@ -9,10 +9,10 @@ Is a simple SQL query builder in Java\
 
 ##### scenario 1
 ```java
-SQLBuilder.getMySQLBuilder().select("fields").from("table").build()
+SQLBuilder.getMySQLBuilder().select("*").from("table").build()
 
 // RESULT : 
-//        SELECT fields FROM `table`;
+//        SELECT * FROM `table`;
 ```
 
 ##### scenario 2
