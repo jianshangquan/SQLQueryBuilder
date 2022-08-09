@@ -1,10 +1,9 @@
 package Builder.interfaces;
 
-import com.jiantech.SearchQueryForSQL.Builder.ConditionBuilder;
-import com.jiantech.SearchQueryForSQL.Builder.SQLBuilder;
-import com.jiantech.SearchQueryForSQL.Builder.SQLCompareType;
 
-import java.util.concurrent.locks.Condition;
+import Builder.ConditionBuilder;
+import Builder.SQLBuilder;
+import Builder.SQLCompareType;
 
 public interface SQLWhereConditions<T> {
 

@@ -11,7 +11,7 @@ public class SQLString {
         return this;
     }
 
-    public String compile(){
+    public String transpile(){
         return toString();
     }
 

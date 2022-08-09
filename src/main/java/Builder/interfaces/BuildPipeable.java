@@ -1,6 +1,6 @@
 package Builder.interfaces;
 
-import com.jiantech.SearchQueryForSQL.Builder.SQLBuilder;
+import Builder.SQLBuilder;
 
 public interface BuildPipeable {
     public SQLBuilder nextPipe() throws Exception;

@@ -1,7 +1,8 @@
 package Builder;
 
-import com.jiantech.SearchQueryForSQL.Builder.Model.VerificationErrorMsg;
-import com.jiantech.SearchQueryForSQL.Builder.interfaces.Verifiable;
+
+import Builder.Model.VerificationErrorMsg;
+import Builder.interfaces.Verifiable;
 
 public class SelectorBuilder implements Verifiable {
     SQLBuilder builder;

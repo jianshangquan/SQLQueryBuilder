@@ -1,8 +1,9 @@
 package Builder;
 
-import com.jiantech.SearchQueryForSQL.Builder.interfaces.Buildable;
-import com.jiantech.SearchQueryForSQL.Builder.interfaces.Joinable;
-import com.jiantech.SearchQueryForSQL.Builder.interfaces.Verifiable;
+
+import Builder.interfaces.Buildable;
+import Builder.interfaces.Joinable;
+import Builder.interfaces.Verifiable;
 
 import java.util.ArrayList;
 import java.util.List;

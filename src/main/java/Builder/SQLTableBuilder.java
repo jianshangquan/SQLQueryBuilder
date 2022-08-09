@@ -1,8 +1,9 @@
 package Builder;
 
-import com.jiantech.SearchQueryForSQL.Builder.Model.VerificationErrorMsg;
-import com.jiantech.SearchQueryForSQL.Builder.interfaces.BuildPipeable;
-import com.jiantech.SearchQueryForSQL.Builder.interfaces.Verifiable;
+
+import Builder.Model.VerificationErrorMsg;
+import Builder.interfaces.BuildPipeable;
+import Builder.interfaces.Verifiable;
 
 public class SQLTableBuilder implements Verifiable, BuildPipeable {
     SQLBuilder builder;

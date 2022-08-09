@@ -1,7 +1,8 @@
 package Builder;
 
-import com.jiantech.SearchQueryForSQL.Builder.Model.VerificationErrorMsg;
-import com.jiantech.SearchQueryForSQL.Builder.interfaces.*;
+
+import Builder.Model.VerificationErrorMsg;
+import Builder.interfaces.*;
 
 public class SQLJoinBuilder implements BuildPipeable, SQLJoinCondition, Joinable, SQLJoinOn, Verifiable {
     SQLBuilder builder;
