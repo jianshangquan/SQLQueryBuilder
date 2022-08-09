@@ -1,7 +1,8 @@
 # SQLQueryBuilder
 
 Is a simple SQL query builder in Java\
-Currently it support only MySQL query
+
+> Note: Currently it support only MySQL query
 
 
 ### HOW TO USE?
